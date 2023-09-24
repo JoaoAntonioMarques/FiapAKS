@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: fiapapipod
-          image: joaoantoniomarques/fiapapi:pt-br
+          image: joaoantoniomarques/fiapapi:latest
           ports:
             - containerPort: 80
 
