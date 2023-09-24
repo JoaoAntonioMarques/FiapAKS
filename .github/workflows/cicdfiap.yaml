@@ -41,7 +41,7 @@ jobs:
         dir
 
     - name: Implantação no Kubernetes
-      run: kubectl apply -f k8s/deployment.yaml 
+      run: kubectl apply -f FiapDocker/k8s/deployment.yaml 
 
     - name: Esperar implantação concluir
       run: kubectl wait --for=condition=available deployment/sua-imagem-deployment
