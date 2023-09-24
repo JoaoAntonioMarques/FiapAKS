@@ -35,8 +35,13 @@ jobs:
     - name: Publicar imagem Docker
       run: docker push joaoantoniomarques/fiapapi:latest
 
+    - name: Listar arquivos no diretório
+      run: |
+        echo "Executando dir..."
+        dir
+
     - name: Implantação no Kubernetes
-      run: kubectl apply -f deployment.yaml 
+      run: kubectl apply -f k8s/deployment.yaml 
 
     - name: Esperar implantação concluir
       run: kubectl wait --for=condition=available deployment/sua-imagem-deployment
