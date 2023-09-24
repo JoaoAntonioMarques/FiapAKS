@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "tmk9ZtWShrn7Yw8azwhd+AxLLfNVWokRPObOiD0I3MImx8nieE6Ye4FFOgj0y9OE7reI5Bu5f+Zn/8I/sijHJA==",
+  "dgSpecHash": "+W2lvAg2UQ1g++IFDdkXLmSNGo/EtcWD1VHdfSZftXpCrgJ6lZyZo8WjdEJy1VETxuIUmx0tAvFhtnTGbvP0Og==",
   "success": true,
-  "projectFilePath": "C:\\Projects\\POCS\\FIAP\\FiapDocker\\FiapDocker\\FiapDocker.csproj",
+  "projectFilePath": "C:\\Projects\\POCS\\FIAP\\FiapAKS\\FiapDocker\\FiapDocker.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\joao_\\.nuget\\packages\\microsoft.aspnetcore.openapi\\7.0.5\\microsoft.aspnetcore.openapi.7.0.5.nupkg.sha512",
     "C:\\Users\\joao_\\.nuget\\packages\\microsoft.extensions.apidescription.server\\6.0.5\\microsoft.extensions.apidescription.server.6.0.5.nupkg.sha512",

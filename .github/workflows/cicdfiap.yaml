@@ -1,4 +1,4 @@
-name: CI/CD AKS
+name: Pipeline de CI/CD FIAP
 
 on:
   push:
@@ -10,23 +10,38 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout code
+    - name: Verificar código
       uses: actions/checkout@v2
 
-    - name: Set up Azure CLI
-      uses: azure/login@v1
+    - name: Configurar ambiente .NET Core
+      uses: actions/setup-dotnet@v1
       with:
-        creds: ${{ secrets.AZURE_CREDENTIALS }}
+        dotnet-version: '7' 
 
-    - name: Login to Azure Container Registry
-      run: az acr login --name <your-acr-name>
+    - name: Restaurar pacotes
+      run: dotnet restore
 
-    - name: Build and push Docker image
-      run: |
-        docker build -t <your-acr-name>/my-app:${{ github.sha }} .
-        docker push <your-acr-name>/my-app:${{ github.sha }}
+    - name: Publicar aplicação
+      run: dotnet publish -c Release -o ./publish
 
-    - name: Deploy to AKS
-      run: |
-        kubectl apply -f kubernetes-manifests/deployment.yaml
-        kubectl rollout restart deployment my-app
+    - name: Configurar ambiente Kubernetes
+      uses: azure/aks-set-context@v1
+      with:
+        cluster-name: FIAP 
+        resource-group: FIAPKUBERNETESAKS  
+        kubeconfig: ${{ secrets.KUBECONFIG_SECRET_NAME }} 
+
+    - name: Fazer login no registro Docker (se necessário)
+      run: docker login -u ${{ secrets.DOCKERHUB_USERNAME }} -p ${{ secrets.DOCKERHUB_TOKEN }}
+
+    - name: Construir imagem Docker
+      run: docker build -t sua-imagem-docker:latest .
+
+    - name: Publicar imagem Docker
+      run: docker push sua-imagem-docker:latest
+
+    - name: Implantação no Kubernetes
+      run: kubectl apply -f deployment.yaml 
+
+    - name: Esperar implantação concluir
+      run: kubectl wait --for=condition=available deployment/sua-imagem-deployment
