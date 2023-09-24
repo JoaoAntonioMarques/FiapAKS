@@ -19,14 +19,14 @@ jobs:
     - name: Publicar aplicação
       run: dotnet publish -c Release -o ./publish
 
-    - name: Configurar ambiente Kubernetes
-      uses: azure/aks-set-context@v1
+    - name: Set up kubectl
+      uses: azure/k8s-set-context@v1
       with:
-        cluster-name: FIAP 
-        resource-group: FIAPKUBERNETESAKS  
-        kubeconfig: ${{ secrets.KUBECONFIG_SECRET_NAME }} 
+        method: kubeconfig
+        kubeconfig: ${{ secrets.KUBE_CONFIG }}
+        version: 1.21.0
 
-    - name: Fazer login no registro Docker (se necessário)
+    - name: Fazer login no registro Docker
       run: docker login -u ${{ secrets.DOCKERHUB_USERNAME }} -p ${{ secrets.DOCKERHUB_TOKEN }}
 
     - name: Construir imagem Docker
