@@ -63,8 +63,8 @@ namespace FiapDocker.Controllers
                 var temp when temp < 15 => "Frio agradavel",
                 var temp when temp < 20 => "Agradável",
                 var temp when temp < 25 => "Moderado",
-                var temp when temp < 30 => "Quente",
-                _ => "Muito Quente",
+                var temp when temp < 30 => "Calor",
+                _ => "Muito Calor",
             };
         }
     }
