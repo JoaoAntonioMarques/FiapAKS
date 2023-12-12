@@ -10,20 +10,20 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Verificar código
+    - name: Verificar cÃ³digo
       uses: actions/checkout@v2
 
     - name: Restaurar pacotes
       run: dotnet restore
 
-    - name: Publicar aplicação
+    - name: Publicar aplicaÃ§Ã£o
       run: dotnet publish -c Release -o ./publish
 
     - name: Set up kubectl
       uses: azure/k8s-set-context@v1
       with:
         method: kubeconfig
-        kubeconfig: ${{ secrets.KUBE_CONFIG }}
+        kubeconfig: ${{ secrets.KUBE_CONFIG_NEW }}
         version: 1.21.0
 
     - name: Fazer login no registro Docker
@@ -35,13 +35,13 @@ jobs:
     - name: Publicar imagem Docker
       run: docker push joaoantoniomarques/fiapapi:latest
 
-    - name: Listar arquivos no diretório
+    - name: Listar arquivos no diretÃ³rio
       run: |
         echo "Executando dir..."
         dir
 
-    - name: Implantação no Kubernetes
+    - name: ImplantaÃ§Ã£o no Kubernetes
       run: kubectl apply -f FiapDocker/k8s/deployment.yaml 
 
-    - name: Esperar implantação concluir
+    - name: Esperar implantaÃ§Ã£o concluir
       run: kubectl wait --for=condition=available deployment/fiapapipod
