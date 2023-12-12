@@ -58,6 +58,7 @@ namespace FiapDocker.Controllers
             return temperaturaC switch
             {
                 var temp when temp < 0 => "Congelante",
+                var temp when temp < 5 => "Friozinho",
                 var temp when temp < 10 => "Frio",
                 var temp when temp < 20 => "Agradável",
                 var temp when temp < 25 => "Moderado",

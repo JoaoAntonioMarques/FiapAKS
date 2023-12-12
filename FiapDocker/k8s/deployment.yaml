@@ -1,7 +1,7 @@
 ﻿apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: fiapapipod
+  name: fiapapipod-Deployment
 spec:
   replicas: 1
   selector:
@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: fiapapipod
-          image: joaoantoniomarques/fiapapi:latest
+          image: joaoantoniomarques/fiapapidocker:latest
           ports:
             - containerPort: 80
 
